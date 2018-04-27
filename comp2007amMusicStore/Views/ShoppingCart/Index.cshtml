@@ -1,0 +1,41 @@
+﻿@model IEnumerable<comp2007amMusicStore.Models.Cart>
+
+@{
+    ViewBag.Title = "Shopping Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Shopping Cart</h2>
+
+@if (Model.Count() == 0)
+{
+    <h1>Your Cart is Empty. Please use the Store link above to start Shopping.</h1>
+}
+else
+{
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>Album</th>
+            <th>Quantity</th>
+            <th class="text-right">Price</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (var a in Model)
+        {
+            <tr>
+                <td>@a.Album.Title</td>
+                <td>@a.Count</td>
+                <td class="text-right">@String.Format("{0:c}", a.Album.Price)</td>
+                <td>@Html.ActionLink("Remove", "RemoveFromCart", "ShoppingCart", new { AlbumId = a.AlbumId }, 
+                    new { @class = "btn btn-default"})
+                </td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="text-right">@String.Format("{0:c}", ViewBag.CartTotal)</td>
+            <td>@Html.ActionLink("Checkout", "Checkout", "ShoppingCart", null, new { @class = "btn btn-default" })</td>
+        </tr>
+    </table>
+}

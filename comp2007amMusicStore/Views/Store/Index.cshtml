@@ -1,0 +1,17 @@
+﻿@model IEnumerable<comp2007amMusicStore.Models.Genre>
+
+@{
+    ViewBag.Title = "Store";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Please Select a Genre</h2>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>@Html.ActionLink(item.Name, "Details", new { id = item.GenreId }) </li>
+    }
+</ul>
+            
+

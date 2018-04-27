@@ -1,0 +1,21 @@
+﻿@model comp2007amMusicStore.Models.Genre
+
+@{
+    ViewBag.Title = "Album List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name Albums</h2>
+
+@foreach (var a in Model.Albums)
+{
+    <article class="img-thumbnail col-md-4 text-center">
+        <h3>@a.Title</h3>
+        <h5>@a.Artist.Name</h5>
+        <img src="@a.AlbumArtUrl" alt="@a.Title" />
+        <p>@Html.DisplayFor(item => a.Price)</p>
+        <p>@Html.ActionLink("Add To Cart", "AddToCart", "ShoppingCart", new { AlbumId = a.AlbumId }, 
+            new { @class = "btn btn-default"})
+        </p>
+    </article>
+}

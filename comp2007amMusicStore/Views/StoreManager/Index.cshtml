@@ -1,0 +1,77 @@
+﻿@model IEnumerable<comp2007amMusicStore.Models.Album>
+
+@{
+    ViewBag.Title = "Store Manager";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.AlbumCount Albums</h2>
+
+<div class="col-md-3">
+    @Html.ActionLink("Create New", "Create")
+</div>
+<div class="col-md-9 text-right">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <input name="Title" id="Title" placeholder="Search by Album Title" />
+        <button class="btn btn-default">Search</button>
+    }
+</div>
+
+<table class="table sortable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Artist.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre.Name)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AlbumArtUrl)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Artist.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Genre.Name)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @if (item.AlbumArtUrl == null)
+            {
+                <img src="~/Content/Images/placeholder.gif" alt="@item.Title" width="100" />
+            }
+            else
+            {
+                <img src="@item.AlbumArtUrl" alt="@item.Title" width="100" />
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.AlbumId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.AlbumId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.AlbumId })
+        </td>
+    </tr>
+}
+
+</table>

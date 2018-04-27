@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Payment</h2>
+
+<h3>Order Total: @String.Format("{0:c}", ViewBag.Total)</h3>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <script src="//checkout.stripe.com/v2/checkout.js"
+            class="stripe-button"
+            data-key="@ViewBag.StripePublishableKey"
+            data-locale="auto"
+            data-description="MVC Music Store Purchase"
+            data-amount="@ViewBag.CentsTotal">
+    </script>
+}
+

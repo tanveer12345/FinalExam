@@ -1,0 +1,25 @@
+﻿@model IEnumerable<comp2007amMusicStore.Models.Artist>
+
+@{
+    ViewBag.Title = "Artists";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Artists</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Name, "Details", "Artists", new { id = item.ArtistId }, null)
+        </td>   
+    </tr>
+}
+
+</table>
